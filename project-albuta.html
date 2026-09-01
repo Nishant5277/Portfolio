@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>AL BUTA Project Case Study - MacroBox</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=Inter:wght@300;400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap');
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F6F3EC;
+      color: #2C4A3B;
+    }
+    h1, h2, h3, h4, h5, h6, .serif-text {
+      font-family: 'Literata', serif;
+    }
+    
+    .font-bodoni { font-family: 'Bodoni Moda', serif; }
+    .font-hanken { font-family: 'Hanken Grotesk', sans-serif; }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {DEFAULT: "#2C4A3B", bg: "#F6F3EC", dim: "#dfdacd"},
+            accent: "#c5523f" 
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+
+<!-- Header -->
+<header id="site-header" class="py-5 px-6 md:px-8 flex justify-between items-center fixed w-full top-0 z-50 bg-[#F6F3EC]/90 backdrop-blur-md border-b border-brand/10">
+  <a class="text-sm font-medium tracking-widest uppercase" href="index.html">MacroBox</a>
+  <a href="index.html" class="text-sm border border-brand/20 px-4 py-2 rounded-full hover:bg-brand hover:text-brand-bg transition-colors">&larr; Back to Portfolio</a>
+</header>
+
+<main class="flex-grow pt-28 pb-20">
+  
+  <!-- Hero Image -->
+  <section class="px-4 md:px-16 lg:px-24 mb-20">
+    <div class="max-w-7xl mx-auto rounded-3xl overflow-hidden shadow-2xl">
+      <img src="assets/projects/albuta/1.png" alt="AL Buta Hero" class="w-full h-auto object-cover">
+    </div>
+  </section>
+
+  <!-- Project Overview -->
+  <section class="px-4 md:px-16 lg:px-24 mb-24">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 border-b border-brand/10 pb-24">
+      
+      <!-- Meta Details -->
+      <div class="md:col-span-4 space-y-8">
+        <div>
+          <h4 class="text-xs uppercase tracking-widest opacity-60 mb-2">Our Role</h4>
+          <p class="font-medium">Digital Art Direction, Full-Stack Engineering</p>
+        </div>
+        <div>
+          <h4 class="text-xs uppercase tracking-widest opacity-60 mb-2">Duration</h4>
+          <p class="font-medium">8 Weeks</p>
+        </div>
+        <div>
+          <h4 class="text-xs uppercase tracking-widest opacity-60 mb-2">Tools</h4>
+          <p class="font-medium">Next.js, Tailwind CSS, Framer Motion</p>
+        </div>
+        <div>
+          <h4 class="text-xs uppercase tracking-widest opacity-60 mb-2">Year</h4>
+          <p class="font-medium">2025</p>
+        </div>
+        <div>
+          <h4 class="text-xs uppercase tracking-widest opacity-60 mb-2">Client</h4>
+          <p class="font-medium text-2xl serif-text mt-1">AL BUTA Haute Joaillerie</p>
+        </div>
+        
+        <div class="pt-6">
+          <a href="https://albutajewellery.com/" target="_blank" class="inline-flex items-center justify-center bg-brand text-brand-bg px-8 py-3 rounded-full hover:bg-brand/90 transition-colors text-sm uppercase tracking-widest font-medium">View Project &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="md:col-span-8">
+        <h2 class="text-4xl md:text-5xl serif-text mb-8 leading-tight">Unyielding Elegance &amp; Precision</h2>
+        <p class="text-lg opacity-80 leading-relaxed mb-6">
+          AL BUTA required a digital platform that matched the unparalleled craftsmanship of their high fashion fine jewelry. The objective was to design an experience steeped in luxury, characterized by pitch-black photography and masterful precision.
+        </p>
+        <p class="text-lg opacity-80 leading-relaxed">
+          We developed a highly sophisticated architecture that seamlessly blends fluid animations with absolute typographic rigor. The result is a platform that feels as meticulously crafted as the jewelry it showcases.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Typography & Colors -->
+  <section class="px-4 md:px-16 lg:px-24 mb-24">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 border-b border-brand/10 pb-24">
+      
+      <!-- Typography -->
+      <div>
+        <h3 class="text-3xl serif-text mb-12">Typography</h3>
+        <div class="grid grid-cols-2 gap-8">
+          <div>
+            <div class="text-4xl font-bodoni italic mb-4">Bodoni Moda</div>
+            <p class="text-xs uppercase tracking-widest opacity-60 mb-4">Heading Font</p>
+            <p class="font-bodoni text-sm opacity-80 leading-loose">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz</p>
+          </div>
+          <div>
+            <div class="text-4xl font-hanken mb-4">Hanken Grotesk</div>
+            <p class="text-xs uppercase tracking-widest opacity-60 mb-4">Body Font</p>
+            <p class="font-hanken text-sm opacity-80 leading-loose">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Colors -->
+      <div>
+         <h3 class="text-3xl serif-text mb-12">Color Palette</h3>
+         <div class="flex flex-wrap gap-8">
+           <div class="text-center">
+             <div class="w-20 h-20 rounded-full bg-[#050505] shadow-md border border-brand/10 mb-4 mx-auto"></div>
+             <p class="text-xs uppercase tracking-widest">#050505</p>
+           </div>
+           <div class="text-center">
+             <div class="w-20 h-20 rounded-full bg-[#FFFFFF] shadow-md border border-brand/10 mb-4 mx-auto"></div>
+             <p class="text-xs uppercase tracking-widest">#FFFFFF</p>
+           </div>
+           <div class="text-center">
+             <div class="w-20 h-20 rounded-full bg-[#D4AF37] shadow-md border border-brand/10 mb-4 mx-auto"></div>
+             <p class="text-xs uppercase tracking-widest">#D4AF37</p>
+           </div>
+         </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Challenges & Features -->
+  <section class="px-4 md:px-16 lg:px-24 mb-24">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <div>
+          <h3 class="text-4xl serif-text mb-8">Challenges & Solutions</h3>
+          <p class="text-lg opacity-80 leading-relaxed mb-10">
+            Showcasing pitch-black luxury photography requires a delicate balance of contrast and subtle motion. The challenge was maintaining performance while delivering a heavy visual aesthetic across all devices. We solved this with advanced SSR techniques and highly optimized media delivery.
+          </p>
+          <h4 class="text-xl serif-text mb-6">Features Implemented</h4>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-4">
+              <svg class="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span class="opacity-80">Next.js SSR/SSG for optimal performance</span>
+            </li>
+            <li class="flex items-start gap-4">
+              <svg class="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span class="opacity-80">Pitch-black aesthetic with perfectly tuned contrasts</span>
+            </li>
+            <li class="flex items-start gap-4">
+              <svg class="w-6 h-6 text-brand mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span class="opacity-80">Framer Motion for smooth UI transitions</span>
+            </li>
+          </ul>
+        </div>
+        <div class="rounded-2xl overflow-hidden shadow-xl">
+          <img src="assets/projects/albuta/2.png" alt="AL Buta Feature Details" class="w-full h-auto object-cover">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery / Walkthrough -->
+  <section class="px-4 md:px-16 lg:px-24 mb-24 bg-white py-24 border-y border-brand/10">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="flex flex-col items-center">
+          <div class="rounded-xl overflow-hidden shadow-lg w-full mb-6">
+            <img src="assets/projects/albuta/3.png" alt="AL Buta View" class="w-full h-auto">
+          </div>
+          <h4 class="text-xl serif-text mb-2">Collection Showcase</h4>
+          <p class="text-sm opacity-60 text-center px-4">Art-directed layouts that respect the craftsmanship.</p>
+        </div>
+        <div class="flex flex-col items-center md:mt-12">
+          <div class="rounded-xl overflow-hidden shadow-lg w-full mb-6">
+            <img src="assets/projects/albuta/4.png" alt="AL Buta View" class="w-full h-auto">
+          </div>
+          <h4 class="text-xl serif-text mb-2">Detailed Craft</h4>
+          <p class="text-sm opacity-60 text-center px-4">High fidelity zoom and motion to display intricacies.</p>
+        </div>
+        <div class="flex flex-col items-center">
+          <div class="rounded-xl overflow-hidden shadow-lg w-full mb-6">
+            <img src="assets/projects/albuta/5.png" alt="AL Buta Alternate View" class="w-full h-auto">
+          </div>
+          <h4 class="text-xl serif-text mb-2">Brand Identity</h4>
+          <p class="text-sm opacity-60 text-center px-4">Seamless integration of classic typography and modern layout.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Outcomes -->
+  <section class="px-4 md:px-16 lg:px-24 mb-12">
+    <div class="max-w-4xl mx-auto text-center">
+      <h3 class="text-4xl serif-text mb-16">The Outcomes</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div class="bg-white p-12 rounded-2xl border border-brand/10 shadow-sm">
+          <div class="text-6xl font-light text-brand mb-4">60%</div>
+          <p class="text-sm uppercase tracking-widest opacity-70">Increase in Consultation Bookings</p>
+        </div>
+        <div class="bg-white p-12 rounded-2xl border border-brand/10 shadow-sm">
+          <div class="text-6xl font-light text-brand mb-4">4x</div>
+          <p class="text-sm uppercase tracking-widest opacity-70">Improved Mobile Engagement</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer CTA -->
+<footer class="bg-brand text-brand-bg py-24 text-center">
+  <h2 class="text-4xl md:text-5xl serif-text mb-8">Ready to experience it?</h2>
+  <a href="https://albutajewellery.com/" target="_blank" class="inline-flex items-center justify-center bg-brand-bg text-brand px-10 py-4 rounded-full hover:scale-105 transition-transform text-sm uppercase tracking-widest font-medium">Explore Live Website &rarr;</a>
+</footer>
+
+</body>
+</html>
