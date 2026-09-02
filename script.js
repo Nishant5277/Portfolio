@@ -1,96 +1,86 @@
 const teamData = {
-  marcus: {
-    name: "Marcus Thorne",
-    role: "Co-founder & Systems Engineer",
-    tagline: "Distributed Systems & Infrastructure",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDqwXWOS2ls8uWCMOZiuXQi-hf_DUzbAIzXlPfMSWrWLUiNjwrpAc7bdnvlzO2ib42SBKPvwrvkNnL2pytP3QxKeXHeOemaIBvii1YLzK0Hcqc3JjGsD9pOWPoLrAp6O3q5gX4BzM5zxAeG6ZQbVH6lTdB85xhpz9BRGuQRaRgDmC0QUEy8KWrZjfLzfQe-TMypEGXwQmxxR37SqGSh-Tu4YACYR1eYoXA9jY-z7sPM5d3lmwFN2HqR",
-    bio: "Marcus approaches infrastructure with the mindset of a horologistâ€”every component must serve a purpose, and efficiency is non-negotiable. Before MacroBox, he spent a decade scaling backend services for high-frequency trading platforms. He believes the best code is the code you delete.",
+  krish: {
+    name: "Krish Kambli",
+    role: "Founder",
+    tagline: "Full Stack Developer and Cybersecurity",
+    image: "assets/team/1.png",
+    bio: "Krish is the visionary behind MacroBox. He combines deep knowledge of full-stack development with a strong focus on cybersecurity to build resilient and secure systems.",
     skills: [
-      { label: "Go / Rust", value: "90%" },
-      { label: "Kubernetes / Docker", value: "85%" },
-      { label: "PostgreSQL / Redis", value: "95%" },
-      { label: "System Architecture", value: "100%" }
+      { label: "Full Stack Development", value: "95%" },
+      { label: "Cybersecurity", value: "90%" },
+      { label: "System Architecture", value: "85%" },
+      { label: "Leadership", value: "100%" }
     ],
-    tags: ["AWS", "Terraform", "Kafka", "gRPC"],
+    tags: ["Security", "Full Stack", "Vision", "Architecture"],
     projects: [
-      { title: "Project One", desc: "Enterprise Arch", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAsXJRifGwUhlFGTg3wxfztTqDoCTgOBoOBEser6jqWCp95f9sqh7v4IsAxiWkUDm6RTTfqT5isGNeHNuzT6hOQ7qalA466_pb890-DNlvrxJvqUPpb620OCbe4Dlmy2Q3AiFiWv5cbTD7r-9Om1-SkXrn5ELXoOMwCtUfpROLjNgMgHTw3pEVxNhCs_XJYpsNM3HDr8K4FpY87CIAFGcYyPdfGxASFrulZRlHp3vODdrkpHTD9_hcP" },
-      { title: "Atmosphere Four", desc: "Infrastructure", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuA4K1OMxDWnleiXxVuAyx9uojpOKj_SCmbxGjG4hMmn_IYxiMvlmnt9uhjNGjX15zuKhHOz-26QSjZiTjrBc9VBC_4mk4QGk9m8SsFyblrxLb9iixt3WF-kNp6lv8LKD6Y4mUpuyxnD48vL21jK8p576FrTr8RjFC2tTFjeoJTpcxWsGPCHbveGM7znLnQnKv390tCqcpT1HdsBhd6ANLZRx7sMMYesvPZewAxFIGVVSB2IXyvx86d-" }
+      { title: "Zyronyx", desc: "Web Application", img: "assets/projects/zyronyx/1.png" },
+      { title: "AL Buta", desc: "E-commerce", img: "assets/projects/albuta/1.png" }
     ],
     uniqueFeature: `
       <div class="bg-brand-bg/50 rounded-lg p-6 border border-brand/10">
-        <p class="text-xs uppercase tracking-widest opacity-60 mb-4">Live Metrics</p>
+        <p class="text-xs uppercase tracking-widest opacity-60 mb-4">Security Metrics</p>
         <div class="grid grid-cols-2 gap-4">
           <div>
-            <div class="text-2xl serif-text">99.999%</div>
-            <div class="text-[10px] uppercase tracking-wider opacity-50">Global Uptime</div>
-          </div>
-          <div>
-            <div class="text-2xl serif-text">&lt;12ms</div>
-            <div class="text-[10px] uppercase tracking-wider opacity-50">Avg Latency</div>
-          </div>
-          <div>
-            <div class="text-2xl serif-text">14.2k</div>
-            <div class="text-[10px] uppercase tracking-wider opacity-50">Deploys (YTD)</div>
-          </div>
-          <div>
             <div class="text-2xl serif-text">0</div>
-            <div class="text-[10px] uppercase tracking-wider opacity-50">Dropped Packets</div>
+            <div class="text-[10px] uppercase tracking-wider opacity-50">Vulnerabilities</div>
+          </div>
+          <div>
+            <div class="text-2xl serif-text">100%</div>
+            <div class="text-[10px] uppercase tracking-wider opacity-50">Encryption</div>
           </div>
         </div>
       </div>
     `
   },
-  elara: {
-    name: "Elara Vance",
-    role: "Creative Technologist",
-    tagline: "Interactive Design & Frontend Architecture",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDfYk8vQeCDgMKccCQshkAa42sjVY8ilidLvUdfGEBU4cHU4FOrl05HjECSzq5DtgME_7NFLRJYWNwWTBeCbliVTcVENhaQ0TDsStmz9k9PevzCR0BARhKrWIsZziIECX8iJlf9we6qIIKy_ZjVuHZjrAN7OPvI1kqYkwO4ObEDjCujpfXxGJojtGZeVmmX5D47UBhH39C2b27a2nOZ0V2Kx92ta-RoaWLhMQq2EkckErVSbTNN20oP",
-    bio: "Bridging the gap between motion and logic. Elara obsesses over 60fps animations, accessible state management, and typographic scale. She crafts interfaces that feel less like software and more like physical objects reacting to touch.",
+  yash: {
+    name: "Yash Kurangale",
+    role: "UI/UX Designer",
+    tagline: "Frontend Developer",
+    image: "assets/team/2.png",
+    bio: "Yash focuses on crafting immersive user experiences. He bridges the gap between design and code, ensuring every interface is as beautiful as it is functional.",
     skills: [
-      { label: "React / Vue", value: "95%" },
-      { label: "WebGL / Three.js", value: "80%" },
-      { label: "CSS Architecture", value: "100%" },
-      { label: "Motion Design", value: "90%" }
+      { label: "UI/UX Design", value: "95%" },
+      { label: "Frontend Development", value: "90%" },
+      { label: "Figma", value: "100%" },
+      { label: "Tailwind CSS", value: "95%" }
     ],
-    tags: ["Framer Motion", "GSAP", "Tailwind", "Figma"],
+    tags: ["Design", "Frontend", "UI/UX", "Tailwind"],
     projects: [
-      { title: "System Two", desc: "Identity & UI", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDQ005Y-MsLW39yydSxWg-dobJFNfkZtPvQgHK41GPwkO06v5s4LLuIooyy5dCwpMfa_qDlY4_mKPIv7AOCgyaPoTXN_gfrobllKAlZ0n4kd8eulgQWBzEospxcd7yRpb7-fGuahF2MyA5DsN31Q-PHlvtieW17EhL8iGccObMg-u2SoJZJDa0qLHVgFtqHDkn37wwVJG95Idr0iwCWW-hqFt-Q0FvLEdcp7hphS1yhAzNcLUHj6g4L" },
-      { title: "Study Three", desc: "Performance", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCtCEiASl871wvYGo1pWq5Rpfj26WTIZu0e4PqanTEB7HSOERO6TzhYkvRylhAvepqfzeGwa7bY4kaiDuwg-RBuMoN7YTsj_ojpGysYOFQl-fF0WgeJ4UFgpzRfw4Tjlue4rh1ajZBqPKzO_8GT2ctQIKYY3LsL_uZk6U5gwoZV4dVjbqMmGjpjudqh5hSSDC9_FOddUncdzSXDCHh189dK5SgCpErAjqRFrsWqr1uTwcB38BRFS7gQ" }
+      { title: "AL Buta", desc: "E-commerce Experience", img: "assets/projects/albuta/2.png" },
+      { title: "Zyronyx", desc: "Interactive UI", img: "assets/projects/zyronyx/2.png" }
     ],
     uniqueFeature: `
       <div class="bg-brand-bg/50 rounded-lg p-6 border border-brand/10 h-full flex flex-col justify-center items-center overflow-hidden relative">
-        <p class="text-xs uppercase tracking-widest opacity-60 absolute top-4 left-4">Component State</p>
+        <p class="text-xs uppercase tracking-widest opacity-60 absolute top-4 left-4">Design System</p>
         <div class="w-32 h-16 bg-white rounded-full flex items-center p-1 shadow-sm mt-4 border border-brand/5 relative cursor-pointer group">
           <div class="w-14 h-14 bg-brand rounded-full transition-transform duration-500 ease-out group-hover:translate-x-16"></div>
         </div>
-        <p class="text-[10px] mt-6 opacity-40">Interactive Demo: Hover to toggle</p>
+        <p class="text-[10px] mt-6 opacity-40">Interactive Demo</p>
       </div>
     `
   },
-  jonas: {
-    name: "Jonas Reed",
-    role: "Principal Architect",
-    tagline: "Full-Stack Cloud & Database Optimization",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCuCDTDOJQ4P8egFI-bdS2YrjI5btJuyJXTL5gtu8wfpLmceLkS6NGaps5cyR0zmTOaiV-1A6mKXUEEIDLMqosP3BbDgkAhlf1wF7xWH28sLUYcZQOoECz-YDxYHiB40xVoUMnkjAR6cQ57Dl7DcxWF8Te_42qJPvdqElbnSxOiBaOhDG4H4djZ2syPbSlFPy4DH9HKhLixNxElK6rYl3C_6lU52y4bXeQusn0HpksSPdFaYN3IH8mA",
-    bio: "Jonas maps chaos into order. With a background in enterprise data modeling and distributed caching, he ensures the foundational layer of every project is robust, secure, and infinitely scalable.",
+  nishant: {
+    name: "Nishant Pingale",
+    role: "Co-Founder",
+    tagline: "Backend Developer and Database Optimization",
+    image: "assets/team/3.png",
+    bio: "Nishant architects the backend logic and optimizes databases to handle massive scale. He ensures that everything behind the scenes runs flawlessly.",
     skills: [
-      { label: "Node.js / Python", value: "95%" },
-      { label: "GraphQL / REST", value: "90%" },
-      { label: "NoSQL / GraphDB", value: "85%" },
-      { label: "Cloud Security", value: "95%" }
+      { label: "Backend Development", value: "95%" },
+      { label: "Database Optimization", value: "90%" },
+      { label: "API Design", value: "85%" },
+      { label: "Cloud Services", value: "90%" }
     ],
-    tags: ["Prisma", "Elasticsearch", "Vercel", "Redis"],
+    tags: ["Backend", "Databases", "APIs", "Optimization"],
     projects: [
-      { title: "Project One", desc: "Enterprise Arch", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAsXJRifGwUhlFGTg3wxfztTqDoCTgOBoOBEser6jqWCp95f9sqh7v4IsAxiWkUDm6RTTfqT5isGNeHNuzT6hOQ7qalA466_pb890-DNlvrxJvqUPpb620OCbe4Dlmy2Q3AiFiWv5cbTD7r-9Om1-SkXrn5ELXoOMwCtUfpROLjNgMgHTw3pEVxNhCs_XJYpsNM3HDr8K4FpY87CIAFGcYyPdfGxASFrulZRlHp3vODdrkpHTD9_hcP" },
-      { title: "Atmosphere Four", desc: "Infrastructure", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuA4K1OMxDWnleiXxVuAyx9uojpOKj_SCmbxGjG4hMmn_IYxiMvlmnt9uhjNGjX15zuKhHOz-26QSjZiTjrBc9VBC_4mk4QGk9m8SsFyblrxLb9iixt3WF-kNp6lv8LKD6Y4mUpuyxnD48vL21jK8p576FrTr8RjFC2tTFjeoJTpcxWsGPCHbveGM7znLnQnKv390tCqcpT1HdsBhd6ANLZRx7sMMYesvPZewAxFIGVVSB2IXyvx86d-" }
+      { title: "Zyronyx", desc: "Core Backend", img: "assets/projects/zyronyx/4.png" },
+      { title: "AL Buta", desc: "Data Architecture", img: "assets/projects/albuta/4.png" }
     ],
     uniqueFeature: `
       <div class="bg-brand-bg/50 rounded-lg p-6 border border-brand/10 h-full flex flex-col justify-center">
-        <p class="text-xs uppercase tracking-widest opacity-60 mb-6">Architecture topology</p>
+        <p class="text-xs uppercase tracking-widest opacity-60 mb-6">Database Topology</p>
         <div class="flex items-center justify-between px-4">
-           <div class="w-12 h-12 border border-brand/20 rounded flex items-center justify-center text-xs">Client</div>
-           <div class="h-[1px] w-8 bg-brand/20"></div>
-           <div class="w-16 h-16 border border-accent bg-accent/5 rounded flex items-center justify-center text-xs">API Gateway</div>
+           <div class="w-12 h-12 border border-brand/20 rounded flex items-center justify-center text-xs">API</div>
            <div class="h-[1px] w-8 bg-brand/20"></div>
            <div class="flex flex-col gap-2">
              <div class="w-12 h-8 border border-brand/20 rounded flex items-center justify-center text-[10px]">DB</div>
@@ -102,6 +92,7 @@ const teamData = {
   }
 };
 
+
 document.addEventListener("DOMContentLoaded", () => {
   // Preloader Logic
   const preloader = document.getElementById("preloader");
@@ -109,22 +100,53 @@ document.addEventListener("DOMContentLoaded", () => {
   const preloaderBar = document.getElementById("preloader-bar");
 
   if (preloader) {
-    // Start text animation slightly after load
-    setTimeout(() => {
-      if (preloaderText) preloaderText.style.transform = "translateY(0)";
-      if (preloaderBar) preloaderBar.style.width = "100%";
-    }, 100);
+    const urlParams = new URLSearchParams(window.location.search);
+    const isFastLoad = urlParams.get('fastLoad') === 'true';
 
-    // Slide up the preloader and re-enable scrolling
-    setTimeout(() => {
-      preloader.style.transform = "translateY(-100%)";
-      document.body.classList.remove("overflow-hidden", "preloading");
-    }, 1800);
+    if (isFastLoad) {
+      // Fast load: hide the bar, faster text animation, faster slide up
+      if (preloaderBar && preloaderBar.parentElement) {
+        preloaderBar.parentElement.style.display = 'none';
+      }
+      if (preloaderText) {
+        preloaderText.style.transitionDuration = '500ms';
+      }
+      preloader.style.transitionDuration = '500ms';
+      
+      setTimeout(() => {
+        if (preloaderText) preloaderText.style.transform = "translateY(0)";
+      }, 50);
 
-    // Remove from DOM completely
-    setTimeout(() => {
-      preloader.remove();
-    }, 2900);
+      setTimeout(() => {
+        preloader.style.transform = "translateY(-100%)";
+        document.body.classList.remove("overflow-hidden", "preloading");
+      }, 600);
+
+      setTimeout(() => {
+        preloader.remove();
+        // Clean up URL
+        const newUrl = window.location.pathname + window.location.hash;
+        window.history.replaceState({}, document.title, newUrl || '/');
+      }, 1200);
+
+    } else {
+      // Start text animation slightly after load
+      setTimeout(() => {
+        if (preloaderText) preloaderText.style.transform = "translateY(0)";
+        if (preloaderBar) preloaderBar.style.width = "100%";
+      }, 100);
+
+      // Slide up the preloader and re-enable scrolling
+      setTimeout(() => {
+        preloader.style.transform = "translateY(-100%)";
+        document.body.classList.remove("overflow-hidden", "preloading");
+      }, 1800);
+
+      // Remove from DOM completely
+      setTimeout(() => {
+        preloader.remove();
+      }, 2900);
+    }
   }
 
   const modal = document.getElementById("team-modal");
@@ -332,6 +354,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.isIntersecting) {
           e.target.classList.add("in-view");
           obs.unobserve(e.target);
+          
+          setTimeout(() => {
+            e.target.classList.remove("reveal", "reveal-delay-1", "reveal-delay-2", "reveal-delay-3", "in-view");
+          }, 1200);
         }
       });
     }, { threshold: 0.12 });

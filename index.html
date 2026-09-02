@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html class="" lang="en">
+
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>MacroBox - Crafting permanent digital architecture</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <style data-purpose="fonts">
     @import url('https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=Inter:wght@300;400;500&display=swap');
-    
+
     body {
       font-family: 'Inter', sans-serif;
       background-color: #F6F3EC;
       color: #2C4A3B;
     }
 
-    h1, h2, h3, h4, h5, h6, .serif-text {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .serif-text {
       font-family: 'Literata', serif;
     }
   </style>
@@ -26,518 +33,679 @@
       theme: {
         extend: {
           colors: {
-            brand: {DEFAULT: "#2C4A3B", bg: "#F6F3EC", dim: "#dfdacd"},
+            brand: { DEFAULT: "#2C4A3B", bg: "#F6F3EC", dim: "#dfdacd" },
             accent: "#c5523f" /* Burnt Sienna */
           }
         }
       }
     };
   </script>
+  <link rel="icon" href="assets/Logo.png" type="image/png">
 </head>
+
 <body class="antialiased min-h-screen flex flex-col overflow-hidden preloading">
-<!-- Custom cursor (desktop only) -->
-<div id="cursor-dot" aria-hidden="true"></div>
-<div id="cursor-ring" aria-hidden="true"></div>
-<!-- BEGIN: Preloader -->
-<div id="preloader" class="fixed inset-0 z-[200] bg-brand flex flex-col items-center justify-center transition-transform duration-1000 ease-[cubic-bezier(0.85,0,0.15,1)] origin-top">
-  <div class="overflow-hidden">
-    <h1 id="preloader-text" class="text-3xl md:text-5xl text-brand-bg uppercase tracking-[0.4em] font-medium transform translate-y-full transition-transform duration-1000 ease-out">MacroBox</h1>
-  </div>
-  <div class="w-48 md:w-64 h-[1px] bg-brand-bg/20 mt-12 overflow-hidden relative">
-    <div id="preloader-bar" class="absolute top-0 left-0 h-full bg-brand-bg w-0 transition-all duration-[1500ms] ease-out"></div>
-  </div>
-</div>
-<!-- END: Preloader -->
-
-<!-- Scroll progress bar -->
-<div id="scroll-progress" aria-hidden="true"></div>
-<!-- BEGIN: Header -->
-<header id="site-header" class="py-5 px-6 md:px-8 flex justify-between items-center fixed w-full top-0 z-50 transition-all duration-400">
-  <a class="text-sm font-medium tracking-widest uppercase header-logo" href="#">MacroBox</a>
-  <!-- Desktop nav -->
-  <nav class="hidden md:flex space-x-8 text-sm header-nav">
-    <a class="nav-link" href="#about" data-section="about">About</a>
-    <a class="nav-link" href="#team" data-section="team">Team</a>
-    <a class="nav-link" href="#work" data-section="work">Work</a>
-    <a class="nav-link" href="#contact" data-section="contact">Contact</a>
-  </nav>
-  <!-- Mobile hamburger -->
-  <button id="nav-toggle" class="md:hidden flex flex-col gap-[5px] p-2 z-60" aria-label="Toggle menu" aria-expanded="false">
-    <span class="ham-bar"></span>
-    <span class="ham-bar"></span>
-    <span class="ham-bar"></span>
-  </button>
-</header>
-<!-- Mobile nav overlay -->
-<div id="mobile-nav" aria-hidden="true" class="fixed inset-0 z-[60] bg-brand text-brand-bg flex flex-col justify-center px-12 mobile-nav-overlay overflow-hidden">
-  <div class="absolute inset-0 pointer-events-none opacity-10" style="background-image: radial-gradient(#F6F3EC 1px, transparent 1px); background-size: 20px 20px;"></div>
-  
-  <button id="close-mobile-nav" aria-label="Close menu" class="absolute top-6 right-6 w-12 h-12 rounded-full flex items-center justify-center text-brand-bg z-20 hover:bg-white/10 transition-colors focus:outline-none">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-  </button>
-  
-  <nav class="flex flex-col items-start gap-6 relative z-10 w-full max-w-sm mx-auto">
-    <a class="mobile-nav-link group flex items-center justify-between w-full border-b border-brand-bg/20 pb-4 text-3xl font-light serif-text" href="#about">
-      <span>About</span>
-      <span class="text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
-    </a>
-    <a class="mobile-nav-link group flex items-center justify-between w-full border-b border-brand-bg/20 pb-4 text-3xl font-light serif-text" href="#team">
-      <span>Team</span>
-      <span class="text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
-    </a>
-    <a class="mobile-nav-link group flex items-center justify-between w-full border-b border-brand-bg/20 pb-4 text-3xl font-light serif-text" href="#work">
-      <span>Work</span>
-      <span class="text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
-    </a>
-    <a class="mobile-nav-link group flex items-center justify-between w-full border-b border-brand-bg/20 pb-4 text-3xl font-light serif-text" href="#contact">
-      <span>Contact</span>
-      <span class="text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
-    </a>
-  </nav>
-
-  <div class="absolute bottom-10 left-12 right-12 flex justify-between items-end z-10">
-    <div class="text-brand-bg/60 text-[10px] leading-relaxed tracking-widest uppercase">
-      macrobox.com@gmail.com<br/>
-      +91 7083096777
+  <!-- Custom cursor (desktop only) -->
+  <div id="cursor-dot" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+  <!-- BEGIN: Preloader -->
+  <div id="preloader"
+    class="fixed inset-0 z-[200] bg-brand flex flex-col items-center justify-center transition-transform duration-1000 ease-[cubic-bezier(0.85,0,0.15,1)] origin-top">
+    <div class="overflow-hidden">
+      <h1 id="preloader-text"
+        class="text-3xl md:text-5xl text-brand-bg uppercase tracking-[0.4em] font-medium transform translate-y-full transition-transform duration-1000 ease-out">
+        MacroBox</h1>
     </div>
-    <p class="text-brand-bg/30 text-[10px] tracking-widest uppercase">© 2024</p>
-  </div>
-</div>
-<!-- END: Header -->
-
-<!-- BEGIN: Main Content -->
-<main class="flex-grow">
-  <!-- BEGIN: Hero Section -->
-  <section class="min-h-screen flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-32 pb-16 relative overflow-hidden">
-    <!-- AcidSquares WebGL Background -->
-    <canvas id="hero-canvas" class="absolute inset-0 pointer-events-none" style="z-index:0;"></canvas>
-    <!-- Subtle radial gradient overlay keeps text readable -->
-    <div class="absolute inset-0 pointer-events-none" style="z-index:1;background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(246,243,236,0.65) 0%,rgba(246,243,236,0.1) 100%);"></div>
-
-    <!-- FLOATING ELEMENTS -->
-    <div class="absolute inset-0 pointer-events-none overflow-hidden" style="z-index: 1.5;">
-      
-      <!-- Top Left: Code Snippet -->
-      <div class="absolute top-[15%] left-[5%] md:left-[10%] bg-white/70 backdrop-blur-md p-4 rounded-xl shadow-lg border border-brand/10 w-48 float-anim-1 transform -rotate-6 pointer-events-auto hover:scale-105 transition-transform duration-300">
-        <div class="flex gap-1 mb-3">
-          <div class="w-2 h-2 rounded-full bg-[#ff5f56]"></div>
-          <div class="w-2 h-2 rounded-full bg-[#ffbd2e]"></div>
-          <div class="w-2 h-2 rounded-full bg-[#27c93f]"></div>
-        </div>
-        <div class="space-y-2">
-          <div class="h-2 w-full bg-brand/10 rounded"></div>
-          <div class="h-2 w-4/5 bg-brand/10 rounded"></div>
-          <div class="h-2 w-5/6 bg-brand/10 rounded"></div>
-          <div class="h-2 w-2/3 bg-brand/20 rounded"></div>
-        </div>
-      </div>
-
-      <!-- Bottom Left: Metrics Badge -->
-      <div class="absolute bottom-[20%] left-[8%] md:left-[15%] bg-brand text-brand-bg p-4 rounded-2xl shadow-xl float-anim-2 transform rotate-3 pointer-events-auto hover:scale-105 transition-transform duration-300 flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full border border-brand-bg/20 flex items-center justify-center text-xs">99%</div>
-        <div>
-          <div class="text-[10px] uppercase tracking-widest opacity-60">Uptime</div>
-          <div class="text-sm font-medium">Global Scale</div>
-        </div>
-      </div>
-
-      <!-- Top Right: Design Tokens -->
-      <div class="absolute top-[20%] right-[5%] md:right-[12%] bg-white p-5 rounded-2xl shadow-xl border border-brand/10 w-40 float-anim-3 transform rotate-6 pointer-events-auto hover:scale-105 transition-transform duration-300">
-        <p class="text-[10px] uppercase tracking-widest opacity-50 mb-3 text-center">Tokens</p>
-        <div class="flex justify-center gap-2 mb-4">
-          <div class="w-6 h-6 rounded-full bg-[#2C4A3B]"></div>
-          <div class="w-6 h-6 rounded-full bg-[#c5523f]"></div>
-          <div class="w-6 h-6 rounded-full bg-[#F6F3EC] border border-brand/20"></div>
-        </div>
-        <div class="text-center font-serif text-lg leading-none">Aa</div>
-      </div>
-
-      <!-- Bottom Right: Abstract UI Component -->
-      <div class="absolute bottom-[25%] right-[10%] md:right-[18%] bg-white/60 backdrop-blur-sm p-4 rounded-full shadow-xl border border-brand/10 float-anim-4 transform -rotate-12 pointer-events-auto hover:scale-105 transition-transform duration-300 flex items-center justify-center">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#c5523f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon>
-          <line x1="12" y1="22" x2="12" y2="15.5"></line>
-          <polyline points="22 8.5 12 15.5 2 8.5"></polyline>
-          <polyline points="2 15.5 12 8.5 22 15.5"></polyline>
-          <line x1="12" y1="2" x2="12" y2="8.5"></line>
-        </svg>
-      </div>
-    </div>
-
-    <!-- Centered Content -->
-    <div class="max-w-4xl mx-auto w-full flex flex-col items-center text-center relative z-10">
-      <div class="inline-flex items-center gap-2 bg-brand/5 border border-brand/10 px-4 py-1.5 rounded-full mb-8 opacity-100">
-        <span class="w-2 h-2 rounded-full bg-[#2ecc71] animate-pulse"></span>
-        <span class="text-xs tracking-[0.2em] uppercase opacity-70">Next-Gen Architecture</span>
-      </div>
-      <h1 class="text-6xl md:text-8xl lg:text-9xl font-light leading-tight mb-8 serif-text tracking-tight">
-        Forge Your<br/>Digital Edge
-      </h1>
-      <p class="text-lg md:text-xl max-w-lg leading-relaxed mb-10 font-light opacity-80 mx-auto">
-        A collective of three specialists—from immersive UI/UX design to highly-optimized backend deployment. We engineer scalable web solutions that command attention.
-      </p>
-      
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a class="inline-flex items-center text-xs font-medium uppercase tracking-widest border border-brand/20 px-8 py-3.5 rounded-full hover:bg-brand/5 transition-colors bg-white/50 backdrop-blur-sm" href="#work">
-          View Services
-        </a>
-        <a class="inline-flex items-center text-xs font-medium uppercase tracking-widest bg-[#2ecc71] text-white px-8 py-3.5 rounded-full hover:bg-[#27ae60] shadow-lg shadow-[#2ecc71]/20 transition-colors" href="#contact">
-          Let's Connect
-        </a>
-      </div>
-    </div>
-
-    <div class="absolute bottom-8 left-8 right-8 flex justify-between text-xs uppercase tracking-widest opacity-50" style="z-index:2;">
-      <span>Est. 2024</span>
-      <a href="#about" class="scroll-down-indicator flex flex-col items-center gap-1 opacity-50 hover:opacity-100 transition-opacity" aria-label="Scroll down">
-        <span class="text-[10px] tracking-widest">Scroll</span>
-        <span class="scroll-chevron">↓</span>
-      </a>
-      <span>Active Worldwide</span>
-    </div>
-  </section>
-  <!-- END: Hero Section -->
-
-  <!-- BEGIN: Tech Stack Ticker -->
-  <section class="tech-ticker-section py-8 md:py-10 overflow-hidden border-y border-brand/10 bg-white/70">
-    <!-- Row 1: scrolls left -->
-    <div class="ticker-row mb-3">
-      <div class="ticker-track ticker-track--fwd">
-        <div class="ticker-item" tabindex="-1"><span class="ticker-name">React</span><span class="ticker-sep">·</span><span class="ticker-desc">Lightning-Fast Component UIs</span></div>
-        <div class="ticker-item" tabindex="-1"><span class="ticker-name">TypeScript</span><span class="ticker-sep">·</span><span class="ticker-desc">Type-Safe Precision</span></div>
-        <div class="ticker-item" tabindex="-1"><span class="ticker-name">Node.js</span><span class="ticker-sep">·</span><span class="ticker-desc">Scalable Backend Systems</span></div>
-        <div class="ticker-item" tabindex="-1"><span class="ticker-name">PostgreSQL</span><span class="ticker-sep">·</span><span class="ticker-desc">Reliable Data Architecture</span></div>
-        <div class="ticker-item" tabindex="-1"><span class="ticker-name">Redis</span><span class="ticker-sep">·</span><span class="ticker-desc">Microsecond Caching</span></div>
-        <div class="ticker-item" tabindex="-1"><span class="ticker-name">Kubernetes</span><span class="ticker-sep">·</span><span class="ticker-desc">Cloud Orchestration</span></div>
-        <div class="ticker-item" tabindex="-1"><span class="ticker-name">GraphQL</span><span class="ticker-sep">·</span><span class="ticker-desc">Efficient Data Fetching</span></div>
-        <div class="ticker-item" tabindex="-1"><span class="ticker-name">Next.js</span><span class="ticker-sep">·</span><span class="ticker-desc">Full-Stack Velocity</span></div>
-        <div class="ticker-item" tabindex="-1"><span class="ticker-name">Docker</span><span class="ticker-sep">·</span><span class="ticker-desc">Containerized Deploys</span></div>
-        <!-- duplicate for seamless loop -->
-        <div class="ticker-item" tabindex="-1"><span class="ticker-name">React</span><span class="ticker-sep">·</span><span class="ticker-desc">Lightning-Fast Component UIs</span></div>
-        <div class="ticker-item" tabindex="-1"><span class="ticker-name">TypeScript</span><span class="ticker-sep">·</span><span class="ticker-desc">Type-Safe Precision</span></div>
-        <div class="ticker-item" tabindex="-1"><span class="ticker-name">Node.js</span><span class="ticker-sep">·</span><span class="ticker-desc">Scalable Backend Systems</span></div>
-        <div class="ticker-item" tabindex="-1"><span class="ticker-name">PostgreSQL</span><span class="ticker-sep">·</span><span class="ticker-desc">Reliable Data Architecture</span></div>
-        <div class="ticker-item" tabindex="-1"><span class="ticker-name">Redis</span><span class="ticker-sep">·</span><span class="ticker-desc">Microsecond Caching</span></div>
-        <div class="ticker-item" tabindex="-1"><span class="ticker-name">Kubernetes</span><span class="ticker-sep">·</span><span class="ticker-desc">Cloud Orchestration</span></div>
-        <div class="ticker-item" tabindex="-1"><span class="ticker-name">GraphQL</span><span class="ticker-sep">·</span><span class="ticker-desc">Efficient Data Fetching</span></div>
-        <div class="ticker-item" tabindex="-1"><span class="ticker-name">Next.js</span><span class="ticker-sep">·</span><span class="ticker-desc">Full-Stack Velocity</span></div>
-        <div class="ticker-item" tabindex="-1"><span class="ticker-name">Docker</span><span class="ticker-sep">·</span><span class="ticker-desc">Containerized Deploys</span></div>
-      </div>
-    </div>
-    <!-- Row 2: scrolls right -->
-    <div class="ticker-row">
-      <div class="ticker-track ticker-track--rev">
-        <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Go</span><span class="ticker-sep">·</span><span class="ticker-desc">Concurrent Systems</span></div>
-        <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Rust</span><span class="ticker-sep">·</span><span class="ticker-desc">Memory-Safe Performance</span></div>
-        <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Terraform</span><span class="ticker-sep">·</span><span class="ticker-desc">Infrastructure as Code</span></div>
-        <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">WebGL</span><span class="ticker-sep">·</span><span class="ticker-desc">GPU-Powered Visuals</span></div>
-        <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Prisma</span><span class="ticker-sep">·</span><span class="ticker-desc">Advanced Data Management</span></div>
-        <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Elasticsearch</span><span class="ticker-sep">·</span><span class="ticker-desc">Real-Time Search</span></div>
-        <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">AWS</span><span class="ticker-sep">·</span><span class="ticker-desc">Global Cloud Scale</span></div>
-        <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Kafka</span><span class="ticker-sep">·</span><span class="ticker-desc">Event-Driven Streaming</span></div>
-        <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">gRPC</span><span class="ticker-sep">·</span><span class="ticker-desc">High-Speed APIs</span></div>
-        <!-- duplicate -->
-        <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Go</span><span class="ticker-sep">·</span><span class="ticker-desc">Concurrent Systems</span></div>
-        <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Rust</span><span class="ticker-sep">·</span><span class="ticker-desc">Memory-Safe Performance</span></div>
-        <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Terraform</span><span class="ticker-sep">·</span><span class="ticker-desc">Infrastructure as Code</span></div>
-        <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">WebGL</span><span class="ticker-sep">·</span><span class="ticker-desc">GPU-Powered Visuals</span></div>
-        <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Prisma</span><span class="ticker-sep">·</span><span class="ticker-desc">Advanced Data Management</span></div>
-        <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Elasticsearch</span><span class="ticker-sep">·</span><span class="ticker-desc">Real-Time Search</span></div>
-        <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">AWS</span><span class="ticker-sep">·</span><span class="ticker-desc">Global Cloud Scale</span></div>
-        <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Kafka</span><span class="ticker-sep">·</span><span class="ticker-desc">Event-Driven Streaming</span></div>
-        <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">gRPC</span><span class="ticker-sep">·</span><span class="ticker-desc">High-Speed APIs</span></div>
-      </div>
-    </div>
-  </section>
-  <!-- END: Tech Stack Ticker -->
-
-  <!-- BEGIN: About / Stats Section -->
-  <section class="py-24 px-8 md:px-16 lg:px-24 bg-white border-y border-brand/10" id="about">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
-      <div class="reveal">
-        <p class="text-xs tracking-[0.2em] uppercase mb-8 opacity-70">About the collective</p>
-        <h2 class="text-4xl md:text-5xl font-light leading-tight serif-text">A team built on restraint, rigor, and an obsession with the details most overlook.</h2>
-      </div>
-      <div class="flex flex-col justify-center reveal reveal-delay-2">
-        <p class="text-lg leading-relaxed mb-12 font-light opacity-80 max-w-lg">We work slowly and deliberately. Every engagement begins with listening, continues with architecture, and ends only when the system holds itself together without us.</p>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-8 border-t border-brand/10 pt-8 sm:pt-12">
-          <div class="reveal reveal-delay-1">
-            <div class="text-5xl serif-text mb-2 stat-count" data-target="3" data-suffix="">3</div>
-            <div class="text-xs tracking-widest uppercase opacity-70">Founders</div>
-          </div>
-          <div class="reveal reveal-delay-2">
-            <div class="text-5xl serif-text mb-2 stat-count" data-target="12" data-suffix="+">12+</div>
-            <div class="text-xs tracking-widest uppercase opacity-70">Global Releases</div>
-          </div>
-          <div class="reveal reveal-delay-3">
-            <div class="text-5xl serif-text mb-2 stat-count" data-target="100" data-suffix="%">100%</div>
-            <div class="text-xs tracking-widest uppercase opacity-70">Uptime SLA</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- END: About / Stats Section -->
-
-  <!-- BEGIN: Team Section -->
-  <section class="py-32 px-8 md:px-16 lg:px-24" id="team">
-    <div class="max-w-6xl mx-auto">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8 reveal">
-        <div>
-          <p class="text-xs tracking-[0.2em] uppercase mb-4 opacity-70">The People</p>
-          <h2 class="text-5xl md:text-6xl font-light leading-tight serif-text">The Hands Behind<br/>the Architecture</h2>
-        </div>
-        <p class="text-sm font-light opacity-70 max-w-xs md:text-right">Three specialists, one shared standard. No juniors, no agencies—just the people who ship.</p>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Team Member 1 -->
-        <div class="team-card reveal reveal-delay-1 rounded-2xl relative">
-          <div class="aspect-[4/5] rounded-2xl mb-6 bg-brand-dim/50 border border-brand/10"></div>
-          <h3 class="text-2xl serif-text mb-1">Krish Kambli</h3>
-          <p class="text-xs tracking-widest uppercase opacity-60 mb-2">Founder</p>
-          <p class="text-sm font-light opacity-70">Full Stack developer and Cybersecurity</p>
-        </div>
-        <!-- Team Member 2 -->
-        <div class="md:mt-16 team-card reveal reveal-delay-2 rounded-2xl relative">
-          <div class="aspect-[4/5] rounded-2xl mb-6 bg-brand-dim/50 border border-brand/10"></div>
-          <h3 class="text-2xl serif-text mb-1">Yash Kurangale</h3>
-          <p class="text-xs tracking-widest uppercase opacity-60 mb-2">UI/UX designer</p>
-          <p class="text-sm font-light opacity-70">Frontend developer</p>
-        </div>
-        <!-- Team Member 3 -->
-        <div class="team-card reveal reveal-delay-3 rounded-2xl relative">
-          <div class="aspect-[4/5] rounded-2xl mb-6 bg-brand-dim/50 border border-brand/10"></div>
-          <h3 class="text-2xl serif-text mb-1">Nishant Pingale</h3>
-          <p class="text-xs tracking-widest uppercase opacity-60 mb-2">Co-Founder</p>
-          <p class="text-sm font-light opacity-70">Backend Deployment and Database Optimization</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- END: Team Section -->
-
-  <!-- BEGIN: Work Gallery -->
-  <section class="py-32 px-8 md:px-16 lg:px-24 bg-brand-dim/30" id="work">
-    <div class="max-w-6xl mx-auto">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8">
-        <div>
-          <p class="text-xs tracking-[0.2em] uppercase mb-4 opacity-70">Selected Work</p>
-          <h2 class="text-5xl md:text-7xl font-light leading-tight serif-text">Built to Last</h2>
-        </div>
-        <p class="text-sm font-light opacity-70 max-w-sm md:text-right">A quiet selection of systems we have designed, engineered, and released into the world.</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-4 lg:gap-8 items-start">
-        <!-- Work Item 1: Zyronyx -->
-        <div class="md:col-span-8 group relative cursor-pointer" onclick="window.location.href='project-zyronyx.html'">
-          <div class="overflow-hidden rounded-2xl bg-white shadow-sm relative">
-            <div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar slider-container" id="slider-zyronyx">
-              <img alt="Zyronyx Screenshot 1" class="w-full flex-shrink-0 object-cover aspect-[16/9] snap-center" src="assets/projects/zyronyx/1.png"/>
-              <img alt="Zyronyx Screenshot 2" class="w-full flex-shrink-0 object-cover aspect-[16/9] snap-center" src="assets/projects/zyronyx/2.png"/>
-              <img alt="Zyronyx Screenshot 3" class="w-full flex-shrink-0 object-cover aspect-[16/9] snap-center" src="assets/projects/zyronyx/3.png"/>
-              <img alt="Zyronyx Screenshot 4" class="w-full flex-shrink-0 object-cover aspect-[16/9] snap-center" src="assets/projects/zyronyx/4.png"/>
-            </div>
-            
-            <!-- Navigation buttons -->
-            <button class="absolute top-1/2 -translate-y-1/2 left-4 w-10 h-10 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center text-brand opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white focus:outline-none slider-prev" data-target="slider-zyronyx" aria-label="Previous image">
-              &larr;
-            </button>
-            <button class="absolute top-1/2 -translate-y-1/2 right-4 w-10 h-10 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center text-brand opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white focus:outline-none slider-next" data-target="slider-zyronyx" aria-label="Next image">
-              &rarr;
-            </button>
-            
-            <div class="p-6 flex justify-between items-end relative z-10 bg-white">
-              <div>
-                <h4 class="text-xl serif-text mb-1">Zyronyx</h4>
-                <p class="text-xs opacity-60 uppercase tracking-widest">Web Application</p>
-              </div>
-              <a href="https://effulgent-dieffenbachia-530bc5.netlify.app" target="_blank" rel="noopener noreferrer" class="text-xs font-medium uppercase tracking-widest border border-brand/20 px-4 py-2 rounded-full hover:bg-brand hover:text-brand-bg transition-colors" onclick="event.stopPropagation();">Visit Site &nearr;</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Work Item 2: AL Buta -->
-        <div class="md:col-span-8 md:col-start-5 md:mt-16 group relative cursor-pointer" onclick="window.location.href='project-albuta.html'">
-          <div class="overflow-hidden rounded-2xl bg-white shadow-sm relative">
-            <div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar slider-container" id="slider-albuta">
-              <img alt="AL Buta Screenshot 1" class="w-full flex-shrink-0 object-cover aspect-[16/9] snap-center" src="assets/projects/albuta/1.png"/>
-              <img alt="AL Buta Screenshot 2" class="w-full flex-shrink-0 object-cover aspect-[16/9] snap-center" src="assets/projects/albuta/2.png"/>
-              <img alt="AL Buta Screenshot 3" class="w-full flex-shrink-0 object-cover aspect-[16/9] snap-center" src="assets/projects/albuta/3.png"/>
-              <img alt="AL Buta Screenshot 4" class="w-full flex-shrink-0 object-cover aspect-[16/9] snap-center" src="assets/projects/albuta/4.png"/>
-              <img alt="AL Buta Screenshot 5" class="w-full flex-shrink-0 object-cover aspect-[16/9] snap-center" src="assets/projects/albuta/5.png"/>
-            </div>
-            
-            <!-- Navigation buttons -->
-            <button class="absolute top-1/2 -translate-y-1/2 left-4 w-10 h-10 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center text-brand opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white focus:outline-none slider-prev" data-target="slider-albuta" aria-label="Previous image">
-              &larr;
-            </button>
-            <button class="absolute top-1/2 -translate-y-1/2 right-4 w-10 h-10 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center text-brand opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white focus:outline-none slider-next" data-target="slider-albuta" aria-label="Next image">
-              &rarr;
-            </button>
-
-            <div class="p-6 flex justify-between items-end relative z-10 bg-white">
-              <div>
-                <h4 class="text-xl serif-text mb-1">AL Buta Jewellery</h4>
-                <p class="text-xs opacity-60 uppercase tracking-widest">E-commerce Experience</p>
-              </div>
-              <a href="https://albutajewellery.com/" target="_blank" rel="noopener noreferrer" class="text-xs font-medium uppercase tracking-widest border border-brand/20 px-4 py-2 rounded-full hover:bg-brand hover:text-brand-bg transition-colors" onclick="event.stopPropagation();">Visit Site &nearr;</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- END: Work Gallery -->
-
-  <!-- BEGIN: Capabilities Section -->
-  <section class="py-32 px-8 md:px-16 lg:px-24">
-    <div class="max-w-4xl mx-auto">
-      <p class="text-xs tracking-[0.2em] uppercase mb-6 opacity-70 reveal">What We Offer</p>
-      <h2 class="text-5xl md:text-7xl font-light leading-tight serif-text mb-16 reveal reveal-delay-1">Capabilities</h2>
-      <ul class="border-t border-brand/20">
-        <li class="border-b border-brand/20 py-8 group cursor-pointer flex justify-between items-center hover:px-4 transition-all duration-300 reveal reveal-delay-1">
-          <div class="flex items-baseline gap-6">
-            <span class="cap-num">01</span>
-            <span class="text-2xl md:text-4xl serif-text group-hover:opacity-70 transition-opacity">Bespoke Core Architecture</span>
-          </div>
-          <span class="cap-arrow text-xl font-light opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">→</span>
-        </li>
-        <li class="border-b border-brand/20 py-8 group cursor-pointer flex justify-between items-center hover:px-4 transition-all duration-300 reveal reveal-delay-2">
-          <div class="flex items-baseline gap-6">
-            <span class="cap-num">02</span>
-            <span class="text-2xl md:text-4xl serif-text group-hover:opacity-70 transition-opacity">High-Performance Web Engines</span>
-          </div>
-          <span class="cap-arrow text-xl font-light opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">→</span>
-        </li>
-        <li class="border-b border-brand/20 py-8 group cursor-pointer flex justify-between items-center hover:px-4 transition-all duration-300 reveal reveal-delay-3">
-          <div class="flex items-baseline gap-6">
-            <span class="cap-num">03</span>
-            <span class="text-2xl md:text-4xl serif-text group-hover:opacity-70 transition-opacity">Design Systems &amp; Identity</span>
-          </div>
-          <span class="cap-arrow text-xl font-light opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">→</span>
-        </li>
-        <li class="border-b border-brand/20 py-8 group cursor-pointer flex justify-between items-center hover:px-4 transition-all duration-300 reveal reveal-delay-3">
-          <div class="flex items-baseline gap-6">
-            <span class="cap-num">04</span>
-            <span class="text-2xl md:text-4xl serif-text group-hover:opacity-70 transition-opacity">Long-Term Stewardship</span>
-          </div>
-          <span class="cap-arrow text-xl font-light opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">→</span>
-        </li>
-      </ul>
-    </div>
-    <!-- BEGIN: Testimonial Section -->
-  <section class="py-32 px-8 md:px-16 lg:px-24 bg-white">
-    <div class="max-w-4xl mx-auto reveal">
-      <div class="w-full">
-        <p class="text-xs tracking-[0.2em] uppercase mb-8 opacity-70">Words On Us</p>
-        <div class="relative">
-          <span class="absolute -top-8 -left-8 text-8xl serif-text opacity-20">“</span>
-          <h3 class="text-3xl md:text-5xl font-light leading-tight serif-text italic mb-8 relative z-10">
-            Their systems operate with a silent precision that is rare in modern engineering. A masterclass in digital craft.
-          </h3>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- END: Testimonial Section -->
-</main>
-<!-- END: Main Content -->
-
-<!-- Back to top button -->
-<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
-<!-- BEGIN: Footer -->
-<footer class="bg-[#1A1A1A] text-[#F6F3EC] py-16 px-8 md:px-16 lg:px-24" id="contact">
-  <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
-    <div>
-      <div class="text-sm font-medium tracking-widest uppercase mb-4 opacity-70">MacroBox</div>
-      <h2 class="text-2xl md:text-3xl serif-text max-w-sm">Crafting permanent digital architecture</h2>
-    </div>
-    <div class="flex flex-col space-y-2">
-      <a class="text-lg hover:opacity-70 transition-opacity" href="mailto:macrobox.com@gmail.com">macrobox.com@gmail.com</a>
-      <a class="text-lg hover:opacity-70 transition-opacity" href="tel:+917083096777">+91 7083096777</a>
-    </div>
-    <div class="text-right text-xs opacity-50 uppercase tracking-widest flex flex-col space-y-2">
-      <p>© 2024 MacroBox</p>
-      <p>All Rights Reserved</p>
+    <div class="w-48 md:w-64 h-[1px] bg-brand-bg/20 mt-12 overflow-hidden relative">
+      <div id="preloader-bar"
+        class="absolute top-0 left-0 h-full bg-brand-bg w-0 transition-all duration-[1500ms] ease-out"></div>
     </div>
   </div>
-</footer>
-<!-- END: Footer -->
-<!-- BEGIN: Team Modal -->
-<div id="team-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-name" class="fixed inset-0 z-[100] flex items-end md:items-center justify-center pointer-events-none">
-  <!-- Backdrop -->
-  <div class="absolute inset-0 bg-[#14140F]/80 backdrop-blur-sm transition-opacity duration-300 pointer-events-auto opacity-0 [.modal-open_&]:opacity-100"></div>
-  
-  <!-- Modal Content Container -->
-  <div id="team-modal-content" class="relative w-full max-w-4xl h-[95vh] md:max-h-[85vh] bg-brand-bg rounded-t-3xl md:rounded-3xl shadow-2xl flex flex-col pointer-events-auto transform transition-transform duration-400 translate-y-full [.modal-open_&]:translate-y-0 md:translate-y-10 md:[.modal-open_&]:translate-y-0 opacity-0 [.modal-open_&]:opacity-100 overflow-hidden">
-    
-    <!-- Close button -->
-    <button id="close-modal" aria-label="Close modal" class="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 bg-white/50 backdrop-blur-sm rounded-full flex items-center justify-center text-brand z-20 hover:bg-white hover:text-accent transition-colors focus:outline-none focus:ring-2 focus:ring-accent shadow-sm">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+  <!-- END: Preloader -->
+
+  <!-- Scroll progress bar -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+  <!-- BEGIN: Header -->
+  <header id="site-header"
+    class="py-5 px-6 md:px-8 flex justify-between items-center fixed w-full top-0 z-50 transition-all duration-400">
+    <a class="text-sm font-medium tracking-widest uppercase header-logo" href="#"><img src="assets/Logo.png" alt="MacroBox Logo" class="h-6 w-auto object-contain inline-block mr-2 -mt-1">MacroBox</a>
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex space-x-8 text-sm header-nav">
+      <a class="nav-link" href="#about" data-section="about">About</a>
+      <a class="nav-link" href="#team" data-section="team">Team</a>
+      <a class="nav-link" href="#work" data-section="work">Work</a>
+      <a class="nav-link" href="#contact" data-section="contact">Contact</a>
+    </nav>
+    <!-- Mobile hamburger -->
+    <button id="nav-toggle" class="md:hidden flex flex-col gap-[5px] p-2 z-60" aria-label="Toggle menu"
+      aria-expanded="false">
+      <span class="ham-bar"></span>
+      <span class="ham-bar"></span>
+      <span class="ham-bar"></span>
     </button>
-    
-    <div class="overflow-y-auto w-full h-full p-6 pt-16 md:pt-12 md:p-12 relative flex flex-col md:block">
-      <!-- Modal Header -->
-      <div class="flex flex-col md:flex-row gap-8 md:gap-12 mb-12 items-start">
-        <div class="w-full md:w-1/3 aspect-[3/4] flex-shrink-0 bg-brand-dim rounded-xl overflow-hidden shadow-sm relative">
-          <img id="modal-image" src="" alt="" class="w-full h-full object-cover grayscale">
+  </header>
+  <!-- Mobile nav overlay -->
+  <div id="mobile-nav" aria-hidden="true"
+    class="fixed inset-0 z-[60] bg-brand text-brand-bg flex flex-col justify-center px-12 mobile-nav-overlay overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none opacity-10"
+      style="background-image: radial-gradient(#F6F3EC 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+    <button id="close-mobile-nav" aria-label="Close menu"
+      class="absolute top-6 right-6 w-12 h-12 rounded-full flex items-center justify-center text-brand-bg z-20 hover:bg-white/10 transition-colors focus:outline-none">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <nav class="flex flex-col items-start gap-6 relative z-10 w-full max-w-sm mx-auto">
+      <a class="mobile-nav-link group flex items-center justify-between w-full border-b border-brand-bg/20 pb-4 text-3xl font-light serif-text"
+        href="#about">
+        <span>About</span>
+        <span class="text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
+      </a>
+      <a class="mobile-nav-link group flex items-center justify-between w-full border-b border-brand-bg/20 pb-4 text-3xl font-light serif-text"
+        href="#team">
+        <span>Team</span>
+        <span class="text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
+      </a>
+      <a class="mobile-nav-link group flex items-center justify-between w-full border-b border-brand-bg/20 pb-4 text-3xl font-light serif-text"
+        href="#work">
+        <span>Work</span>
+        <span class="text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
+      </a>
+      <a class="mobile-nav-link group flex items-center justify-between w-full border-b border-brand-bg/20 pb-4 text-3xl font-light serif-text"
+        href="#contact">
+        <span>Contact</span>
+        <span class="text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
+      </a>
+    </nav>
+
+    <div class="absolute bottom-10 left-12 right-12 flex justify-between items-end z-10">
+      <div class="text-brand-bg/60 text-[10px] leading-relaxed tracking-widest uppercase">
+        macrobox.com@gmail.com<br />
+        +91 7083096777
+      </div>
+      <p class="text-brand-bg/30 text-[10px] tracking-widest uppercase">© 2024</p>
+    </div>
+  </div>
+  <!-- END: Header -->
+
+  <!-- BEGIN: Main Content -->
+  <main class="flex-grow">
+    <!-- BEGIN: Hero Section -->
+    <section
+      class="min-h-screen flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-32 pb-16 relative overflow-hidden">
+      <!-- AcidSquares WebGL Background -->
+      <canvas id="hero-canvas" class="absolute inset-0 pointer-events-none" style="z-index:0;"></canvas>
+      <!-- Subtle radial gradient overlay keeps text readable -->
+      <div class="absolute inset-0 pointer-events-none"
+        style="z-index:1;background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(246,243,236,0.65) 0%,rgba(246,243,236,0.1) 100%);">
+      </div>
+
+      <!-- FLOATING ELEMENTS -->
+      <div class="absolute inset-0 pointer-events-none overflow-hidden" style="z-index: 1.5;">
+
+        <!-- Top Left: Code Snippet -->
+        <div
+          class="absolute top-[15%] left-[5%] md:left-[10%] bg-white/70 backdrop-blur-md p-4 rounded-xl shadow-lg border border-brand/10 w-48 float-anim-1 transform -rotate-6 pointer-events-auto hover:scale-105 transition-transform duration-300">
+          <div class="flex gap-1 mb-3">
+            <div class="w-2 h-2 rounded-full bg-[#ff5f56]"></div>
+            <div class="w-2 h-2 rounded-full bg-[#ffbd2e]"></div>
+            <div class="w-2 h-2 rounded-full bg-[#27c93f]"></div>
+          </div>
+          <div class="space-y-2">
+            <div class="h-2 w-full bg-brand/10 rounded"></div>
+            <div class="h-2 w-4/5 bg-brand/10 rounded"></div>
+            <div class="h-2 w-5/6 bg-brand/10 rounded"></div>
+            <div class="h-2 w-2/3 bg-brand/20 rounded"></div>
+          </div>
         </div>
-        <div class="w-full md:w-2/3 pt-0 md:pt-4">
-          <h2 id="modal-name" class="text-4xl md:text-5xl serif-text mb-2"></h2>
-          <p id="modal-role" class="text-sm tracking-widest uppercase opacity-60 mb-6 font-medium text-accent"></p>
-          <p id="modal-bio" class="text-lg leading-relaxed font-light opacity-80 max-w-xl modal-body-content"></p>
-          
-          <div class="mt-8 flex flex-wrap gap-2 modal-body-content" id="modal-tags">
-            <!-- Tags injected here -->
+
+        <!-- Bottom Left: Metrics Badge -->
+        <div
+          class="absolute bottom-[20%] left-[8%] md:left-[15%] bg-brand text-brand-bg p-4 rounded-2xl shadow-xl float-anim-2 transform rotate-3 pointer-events-auto hover:scale-105 transition-transform duration-300 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full border border-brand-bg/20 flex items-center justify-center text-xs">99%
+          </div>
+          <div>
+            <div class="text-[10px] uppercase tracking-widest opacity-60">Uptime</div>
+            <div class="text-sm font-medium">Global Scale</div>
+          </div>
+        </div>
+
+        <!-- Top Right: Design Tokens -->
+        <div
+          class="absolute top-[20%] right-[5%] md:right-[12%] bg-white p-5 rounded-2xl shadow-xl border border-brand/10 w-40 float-anim-3 transform rotate-6 pointer-events-auto hover:scale-105 transition-transform duration-300">
+          <p class="text-[10px] uppercase tracking-widest opacity-50 mb-3 text-center">Tokens</p>
+          <div class="flex justify-center gap-2 mb-4">
+            <div class="w-6 h-6 rounded-full bg-[#2C4A3B]"></div>
+            <div class="w-6 h-6 rounded-full bg-[#c5523f]"></div>
+            <div class="w-6 h-6 rounded-full bg-[#F6F3EC] border border-brand/20"></div>
+          </div>
+          <div class="text-center font-serif text-lg leading-none">Aa</div>
+        </div>
+
+        <!-- Bottom Right: Abstract UI Component -->
+        <div
+          class="absolute bottom-[25%] right-[10%] md:right-[18%] bg-white/60 backdrop-blur-sm p-4 rounded-full shadow-xl border border-brand/10 float-anim-4 transform -rotate-12 pointer-events-auto hover:scale-105 transition-transform duration-300 flex items-center justify-center">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#c5523f" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon>
+            <line x1="12" y1="22" x2="12" y2="15.5"></line>
+            <polyline points="22 8.5 12 15.5 2 8.5"></polyline>
+            <polyline points="2 15.5 12 8.5 22 15.5"></polyline>
+            <line x1="12" y1="2" x2="12" y2="8.5"></line>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Centered Content -->
+      <div class="max-w-4xl mx-auto w-full flex flex-col items-center text-center relative z-10">
+        <div
+          class="inline-flex items-center gap-2 bg-brand/5 border border-brand/10 px-4 py-1.5 rounded-full mb-8 opacity-100">
+          <span class="w-2 h-2 rounded-full bg-[#2ecc71] animate-pulse"></span>
+          <span class="text-xs tracking-[0.2em] uppercase opacity-70">Next-Gen Architecture</span>
+        </div>
+        <h1 class="text-6xl md:text-8xl lg:text-9xl font-light leading-tight mb-8 serif-text tracking-tight">
+          Forge Your<br />Digital Edge
+        </h1>
+        <p class="text-lg md:text-xl max-w-lg leading-relaxed mb-10 font-light opacity-80 mx-auto">
+          A collective of three specialists—from immersive UI/UX design to highly-optimized backend deployment. We
+          engineer scalable web solutions that command attention.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a class="inline-flex items-center text-xs font-medium uppercase tracking-widest border border-brand/20 px-8 py-3.5 rounded-full hover:bg-brand/5 transition-colors bg-white/50 backdrop-blur-sm"
+            href="#work">
+            View Services
+          </a>
+          <a class="inline-flex items-center text-xs font-medium uppercase tracking-widest bg-[#2ecc71] text-white px-8 py-3.5 rounded-full hover:bg-[#27ae60] shadow-lg shadow-[#2ecc71]/20 transition-colors"
+            href="connect.html">
+            Let's Connect
+          </a>
+        </div>
+      </div>
+
+      <div class="absolute bottom-8 left-8 right-8 flex justify-between text-xs uppercase tracking-widest opacity-50"
+        style="z-index:2;">
+        <span>Est. 2024</span>
+        <a href="#about"
+          class="scroll-down-indicator flex flex-col items-center gap-1 opacity-50 hover:opacity-100 transition-opacity"
+          aria-label="Scroll down">
+          <span class="text-[10px] tracking-widest">Scroll</span>
+          <span class="scroll-chevron">↓</span>
+        </a>
+        <span>Active Worldwide</span>
+      </div>
+    </section>
+    <!-- END: Hero Section -->
+
+    <!-- BEGIN: Tech Stack Ticker -->
+    <section class="tech-ticker-section py-8 md:py-10 overflow-hidden border-y border-brand/10 bg-white/70">
+      <!-- Row 1: scrolls left -->
+      <div class="ticker-row mb-3">
+        <div class="ticker-track ticker-track--fwd">
+          <div class="ticker-item" tabindex="-1"><span class="ticker-name">React</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Lightning-Fast Component UIs</span></div>
+          <div class="ticker-item" tabindex="-1"><span class="ticker-name">TypeScript</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Type-Safe Precision</span></div>
+          <div class="ticker-item" tabindex="-1"><span class="ticker-name">Node.js</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Scalable Backend Systems</span></div>
+          <div class="ticker-item" tabindex="-1"><span class="ticker-name">PostgreSQL</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Reliable Data Architecture</span></div>
+          <div class="ticker-item" tabindex="-1"><span class="ticker-name">Redis</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Microsecond Caching</span></div>
+          <div class="ticker-item" tabindex="-1"><span class="ticker-name">Kubernetes</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Cloud Orchestration</span></div>
+          <div class="ticker-item" tabindex="-1"><span class="ticker-name">GraphQL</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Efficient Data Fetching</span></div>
+          <div class="ticker-item" tabindex="-1"><span class="ticker-name">Next.js</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Full-Stack Velocity</span></div>
+          <div class="ticker-item" tabindex="-1"><span class="ticker-name">Docker</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Containerized Deploys</span></div>
+          <!-- duplicate for seamless loop -->
+          <div class="ticker-item" tabindex="-1"><span class="ticker-name">React</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Lightning-Fast Component UIs</span></div>
+          <div class="ticker-item" tabindex="-1"><span class="ticker-name">TypeScript</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Type-Safe Precision</span></div>
+          <div class="ticker-item" tabindex="-1"><span class="ticker-name">Node.js</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Scalable Backend Systems</span></div>
+          <div class="ticker-item" tabindex="-1"><span class="ticker-name">PostgreSQL</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Reliable Data Architecture</span></div>
+          <div class="ticker-item" tabindex="-1"><span class="ticker-name">Redis</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Microsecond Caching</span></div>
+          <div class="ticker-item" tabindex="-1"><span class="ticker-name">Kubernetes</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Cloud Orchestration</span></div>
+          <div class="ticker-item" tabindex="-1"><span class="ticker-name">GraphQL</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Efficient Data Fetching</span></div>
+          <div class="ticker-item" tabindex="-1"><span class="ticker-name">Next.js</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Full-Stack Velocity</span></div>
+          <div class="ticker-item" tabindex="-1"><span class="ticker-name">Docker</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Containerized Deploys</span></div>
+        </div>
+      </div>
+      <!-- Row 2: scrolls right -->
+      <div class="ticker-row">
+        <div class="ticker-track ticker-track--rev">
+          <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Go</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Concurrent Systems</span></div>
+          <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Rust</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Memory-Safe Performance</span></div>
+          <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Terraform</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Infrastructure as Code</span></div>
+          <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">WebGL</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">GPU-Powered Visuals</span></div>
+          <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Prisma</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Advanced Data Management</span></div>
+          <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Elasticsearch</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Real-Time Search</span></div>
+          <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">AWS</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Global Cloud Scale</span></div>
+          <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Kafka</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Event-Driven Streaming</span></div>
+          <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">gRPC</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">High-Speed APIs</span></div>
+          <!-- duplicate -->
+          <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Go</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Concurrent Systems</span></div>
+          <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Rust</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Memory-Safe Performance</span></div>
+          <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Terraform</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Infrastructure as Code</span></div>
+          <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">WebGL</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">GPU-Powered Visuals</span></div>
+          <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Prisma</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Advanced Data Management</span></div>
+          <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Elasticsearch</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Real-Time Search</span></div>
+          <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">AWS</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Global Cloud Scale</span></div>
+          <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">Kafka</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">Event-Driven Streaming</span></div>
+          <div class="ticker-item ticker-item--alt" tabindex="-1"><span class="ticker-name">gRPC</span><span
+              class="ticker-sep">·</span><span class="ticker-desc">High-Speed APIs</span></div>
+        </div>
+      </div>
+    </section>
+    <!-- END: Tech Stack Ticker -->
+
+    <!-- BEGIN: About / Stats Section -->
+    <section class="py-24 px-8 md:px-16 lg:px-24 bg-white border-y border-brand/10" id="about">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div class="reveal">
+          <p class="text-xs tracking-[0.2em] uppercase mb-8 opacity-70">About the collective</p>
+          <h2 class="text-4xl md:text-5xl font-light leading-tight serif-text">A team built on restraint, rigor, and an
+            obsession with the details most overlook.</h2>
+        </div>
+        <div class="flex flex-col justify-center reveal reveal-delay-2">
+          <p class="text-lg leading-relaxed mb-12 font-light opacity-80 max-w-lg">We work slowly and deliberately. Every
+            engagement begins with listening, continues with architecture, and ends only when the system holds itself
+            together without us.</p>
+          <div class="grid grid-cols-3 gap-2 sm:gap-8 border-t border-brand/10 pt-8 sm:pt-12">
+            <div class="reveal reveal-delay-1">
+              <div class="text-3xl sm:text-5xl serif-text mb-1 sm:mb-2 stat-count" data-target="3" data-suffix="">3
+              </div>
+              <div class="text-[9px] sm:text-xs tracking-widest uppercase opacity-70 leading-tight">Founders</div>
+            </div>
+            <div class="reveal reveal-delay-2">
+              <div class="text-3xl sm:text-5xl serif-text mb-1 sm:mb-2 stat-count" data-target="12" data-suffix="+">12+
+              </div>
+              <div class="text-[9px] sm:text-xs tracking-widest uppercase opacity-70 leading-tight">Global Releases
+              </div>
+            </div>
+            <div class="reveal reveal-delay-3">
+              <div class="text-3xl sm:text-5xl serif-text mb-1 sm:mb-2 stat-count" data-target="100" data-suffix="%">
+                100%</div>
+              <div class="text-[9px] sm:text-xs tracking-widest uppercase opacity-70 leading-tight">Uptime SLA</div>
+            </div>
           </div>
         </div>
       </div>
-      
-      <!-- Modal Details Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 modal-body-content pb-12">
-        <!-- Skills & Projects -->
-        <div class="space-y-12">
+    </section>
+    <!-- END: About / Stats Section -->
+
+    <!-- BEGIN: Team Section -->
+    <section class="py-32 px-8 md:px-16 lg:px-24" id="team">
+      <div class="max-w-6xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8 reveal">
           <div>
-            <h3 class="text-sm font-medium tracking-widest uppercase mb-6 opacity-70">Proficiency</h3>
-            <div id="modal-skills" class="space-y-4">
-              <!-- Skills injected here -->
+            <p class="text-xs tracking-[0.2em] uppercase mb-4 opacity-70">The People</p>
+            <h2 class="text-5xl md:text-6xl font-light leading-tight serif-text">The Hands Behind<br />the Architecture
+            </h2>
+          </div>
+          <p class="text-sm font-light opacity-70 max-w-xs md:text-right">Three specialists, one shared standard. No
+            juniors, no agencies—just the people who ship.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Team Member 1 -->
+          <div class="team-card group reveal reveal-delay-1 rounded-2xl relative cursor-pointer" data-member="krish">
+            <img src="assets/team/1.png" alt="Krish Kambli" class="aspect-[4/5] w-full object-cover rounded-2xl mb-6 bg-brand-dim/50 border border-brand/10 shadow-sm transition-transform duration-500 group-hover:scale-[1.02]">
+            <h3 class="text-2xl serif-text mb-1">Krish Kambli</h3>
+            <p class="text-xs tracking-widest uppercase opacity-60 mb-2">Founder</p>
+            <p class="text-sm font-light opacity-70">Full Stack Developer and Cybersecurity</p>
+          </div>
+          <!-- Team Member 2 -->
+          <div class="md:mt-16 team-card group reveal reveal-delay-2 rounded-2xl relative cursor-pointer" data-member="yash">
+            <img src="assets/team/2.png" alt="Yash Kurangale" class="aspect-[4/5] w-full object-cover rounded-2xl mb-6 bg-brand-dim/50 border border-brand/10 shadow-sm transition-transform duration-500 group-hover:scale-[1.02]">
+            <h3 class="text-2xl serif-text mb-1">Yash Kurangale</h3>
+            <p class="text-xs tracking-widest uppercase opacity-60 mb-2">UI/UX Designer</p>
+            <p class="text-sm font-light opacity-70">Frontend Developer</p>
+          </div>
+          <!-- Team Member 3 -->
+          <div class="team-card group reveal reveal-delay-3 rounded-2xl relative cursor-pointer" data-member="nishant">
+            <img src="assets/team/3.png" alt="Nishant Pingale" class="aspect-[4/5] w-full object-cover rounded-2xl mb-6 bg-brand-dim/50 border border-brand/10 shadow-sm transition-transform duration-500 group-hover:scale-[1.02]">
+            <h3 class="text-2xl serif-text mb-1">Nishant Pingale</h3>
+            <p class="text-xs tracking-widest uppercase opacity-60 mb-2">Co-Founder</p>
+            <p class="text-sm font-light opacity-70">Backend Developer and Database Optimization</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END: Team Section -->
+
+    <!-- BEGIN: Work Gallery -->
+    <section class="py-32 px-8 md:px-16 lg:px-24 bg-brand-dim/30" id="work">
+      <div class="max-w-6xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8">
+          <div>
+            <p class="text-xs tracking-[0.2em] uppercase mb-4 opacity-70">Selected Work</p>
+            <h2 class="text-5xl md:text-7xl font-light leading-tight serif-text">Built to Last</h2>
+          </div>
+          <p class="text-sm font-light opacity-70 max-w-sm md:text-right">A quiet selection of systems we have designed,
+            engineered, and released into the world.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-4 lg:gap-8 items-start">
+          <!-- Work Item 1: Zyronyx -->
+          <div class="md:col-span-8 group relative cursor-pointer"
+            onclick="window.location.href='project-zyronyx.html'">
+            <div class="overflow-hidden rounded-2xl bg-white shadow-sm relative">
+              <div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar slider-container"
+                id="slider-zyronyx">
+                <img alt="Zyronyx Screenshot 1" class="w-full flex-shrink-0 object-cover aspect-[16/9] snap-center"
+                  src="assets/projects/zyronyx/1.png" />
+                <img alt="Zyronyx Screenshot 2" class="w-full flex-shrink-0 object-cover aspect-[16/9] snap-center"
+                  src="assets/projects/zyronyx/2.png" />
+                <img alt="Zyronyx Screenshot 3" class="w-full flex-shrink-0 object-cover aspect-[16/9] snap-center"
+                  src="assets/projects/zyronyx/3.png" />
+                <img alt="Zyronyx Screenshot 4" class="w-full flex-shrink-0 object-cover aspect-[16/9] snap-center"
+                  src="assets/projects/zyronyx/4.png" />
+              </div>
+
+              <!-- Navigation buttons -->
+              <button
+                class="absolute top-1/2 -translate-y-1/2 left-4 w-10 h-10 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center text-brand opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white focus:outline-none slider-prev"
+                data-target="slider-zyronyx" aria-label="Previous image">
+                &larr;
+              </button>
+              <button
+                class="absolute top-1/2 -translate-y-1/2 right-4 w-10 h-10 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center text-brand opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white focus:outline-none slider-next"
+                data-target="slider-zyronyx" aria-label="Next image">
+                &rarr;
+              </button>
+
+              <div class="p-6 flex justify-between items-end relative z-10 bg-white">
+                <div>
+                  <h4 class="text-xl serif-text mb-1">Zyronyx</h4>
+                  <p class="text-xs opacity-60 uppercase tracking-widest">Web Application</p>
+                </div>
+                <a href="https://effulgent-dieffenbachia-530bc5.netlify.app" target="_blank" rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 whitespace-nowrap text-xs font-medium uppercase tracking-widest border border-brand/20 px-4 py-2 rounded-full hover:bg-[#2ecc71] hover:border-[#2ecc71] hover:text-white transition-colors"
+                  onclick="event.stopPropagation();">Visit Site <span>&nearr;</span></a>
+              </div>
             </div>
           </div>
-          <div>
-            <h3 class="text-sm font-medium tracking-widest uppercase mb-6 opacity-70">Selected Contributions</h3>
-            <div id="modal-projects">
-              <!-- Projects injected here -->
+
+          <!-- Work Item 2: AL Buta -->
+          <div class="md:col-span-8 md:col-start-5 md:mt-16 group relative cursor-pointer"
+            onclick="window.location.href='project-albuta.html'">
+            <div class="overflow-hidden rounded-2xl bg-white shadow-sm relative">
+              <div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar slider-container"
+                id="slider-albuta">
+                <img alt="AL Buta Screenshot 1" class="w-full flex-shrink-0 object-cover aspect-[16/9] snap-center"
+                  src="assets/projects/albuta/1.png" />
+                <img alt="AL Buta Screenshot 2" class="w-full flex-shrink-0 object-cover aspect-[16/9] snap-center"
+                  src="assets/projects/albuta/2.png" />
+                <img alt="AL Buta Screenshot 3" class="w-full flex-shrink-0 object-cover aspect-[16/9] snap-center"
+                  src="assets/projects/albuta/3.png" />
+                <img alt="AL Buta Screenshot 4" class="w-full flex-shrink-0 object-cover aspect-[16/9] snap-center"
+                  src="assets/projects/albuta/4.png" />
+                <img alt="AL Buta Screenshot 5" class="w-full flex-shrink-0 object-cover aspect-[16/9] snap-center"
+                  src="assets/projects/albuta/5.png" />
+              </div>
+
+              <!-- Navigation buttons -->
+              <button
+                class="absolute top-1/2 -translate-y-1/2 left-4 w-10 h-10 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center text-brand opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white focus:outline-none slider-prev"
+                data-target="slider-albuta" aria-label="Previous image">
+                &larr;
+              </button>
+              <button
+                class="absolute top-1/2 -translate-y-1/2 right-4 w-10 h-10 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center text-brand opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white focus:outline-none slider-next"
+                data-target="slider-albuta" aria-label="Next image">
+                &rarr;
+              </button>
+
+              <div class="p-6 flex justify-between items-end relative z-10 bg-white">
+                <div>
+                  <h4 class="text-xl serif-text mb-1">AL Buta Jewellery</h4>
+                  <p class="text-xs opacity-60 uppercase tracking-widest">E-commerce Experience</p>
+                </div>
+                <a href="https://albutajewellery.com/" target="_blank" rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 whitespace-nowrap text-xs font-medium uppercase tracking-widest border border-brand/20 px-4 py-2 rounded-full hover:bg-[#2ecc71] hover:border-[#2ecc71] hover:text-white transition-colors"
+                  onclick="event.stopPropagation();">Visit Site <span>&nearr;</span></a>
+              </div>
             </div>
           </div>
         </div>
-        
-        <!-- Unique Feature Block -->
-        <div>
-           <h3 class="text-sm font-medium tracking-widest uppercase mb-6 opacity-70">Specialty</h3>
-           <div id="modal-unique" class="h-64">
-             <!-- Unique feature injected here -->
-           </div>
-           
-           <div class="mt-12 flex items-center gap-6 pt-8 border-t border-brand/10">
-              <a href="#" class="opacity-60 hover:opacity-100 hover:text-accent transition-colors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
-              <a href="#" class="opacity-60 hover:opacity-100 hover:text-accent transition-colors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-              <a href="#" class="opacity-60 hover:opacity-100 hover:text-accent transition-colors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg></a>
-           </div>
+      </div>
+    </section>
+    <!-- END: Work Gallery -->
+
+    <!-- BEGIN: Capabilities Section -->
+    <section class="py-32 px-8 md:px-16 lg:px-24">
+      <div class="max-w-4xl mx-auto">
+        <p class="text-xs tracking-[0.2em] uppercase mb-6 opacity-70 reveal">What We Offer</p>
+        <h2 class="text-5xl md:text-7xl font-light leading-tight serif-text mb-16 reveal reveal-delay-1">Capabilities
+        </h2>
+        <ul class="border-t border-brand/20">
+          <li
+            class="border-b border-brand/20 py-8 group cursor-pointer flex justify-between items-center hover:px-4 transition-all duration-300 reveal reveal-delay-1"
+            onclick="window.location.href='service-architecture.html'">
+            <div class="flex items-baseline gap-6">
+              <span class="cap-num">01</span>
+              <span class="text-2xl md:text-4xl serif-text group-hover:opacity-70 transition-opacity">Bespoke Core
+                Architecture</span>
+            </div>
+            <span
+              class="cap-arrow text-xl font-light opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">→</span>
+          </li>
+          <li
+            class="border-b border-brand/20 py-8 group cursor-pointer flex justify-between items-center hover:px-4 transition-all duration-300 reveal reveal-delay-2"
+            onclick="window.location.href='service-engines.html'">
+            <div class="flex items-baseline gap-6">
+              <span class="cap-num">02</span>
+              <span class="text-2xl md:text-4xl serif-text group-hover:opacity-70 transition-opacity">High-Performance
+                Web Engines</span>
+            </div>
+            <span
+              class="cap-arrow text-xl font-light opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">→</span>
+          </li>
+          <li
+            class="border-b border-brand/20 py-8 group cursor-pointer flex justify-between items-center hover:px-4 transition-all duration-300 reveal reveal-delay-3"
+            onclick="window.location.href='service-design.html'">
+            <div class="flex items-baseline gap-6">
+              <span class="cap-num">03</span>
+              <span class="text-2xl md:text-4xl serif-text group-hover:opacity-70 transition-opacity">Design Systems
+                &amp; Identity</span>
+            </div>
+            <span
+              class="cap-arrow text-xl font-light opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">→</span>
+          </li>
+          <li
+            class="border-b border-brand/20 py-8 group cursor-pointer flex justify-between items-center hover:px-4 transition-all duration-300 reveal reveal-delay-3"
+            onclick="window.location.href='service-stewardship.html'">
+            <div class="flex items-baseline gap-6">
+              <span class="cap-num">04</span>
+              <span class="text-2xl md:text-4xl serif-text group-hover:opacity-70 transition-opacity">Long-Term
+                Stewardship</span>
+            </div>
+            <span
+              class="cap-arrow text-xl font-light opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">→</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <!-- BEGIN: Testimonial Section -->
+    <section class="py-16 md:py-32 px-8 md:px-16 lg:px-24 bg-white">
+      <div class="max-w-4xl mx-auto reveal">
+        <div class="w-full">
+          <p class="text-xs tracking-[0.2em] uppercase mb-8 opacity-70">Words On Us</p>
+          <div class="relative">
+            <span class="absolute -top-8 -left-8 text-8xl serif-text opacity-20">“</span>
+            <h3 class="text-3xl md:text-5xl font-light leading-tight serif-text italic mb-8 relative z-10">
+              Their systems operate with a silent precision that is rare in modern engineering. A masterclass in digital
+              craft.
+            </h3>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END: Testimonial Section -->
+  </main>
+  <!-- END: Main Content -->
+
+  <!-- Back to top button -->
+  <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
+  <!-- BEGIN: Footer -->
+  <footer class="bg-[#1A1A1A] text-[#F6F3EC] py-16 px-8 md:px-16 lg:px-24" id="contact">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+      <div>
+        <div class="text-sm font-medium tracking-widest uppercase mb-4 opacity-70">MacroBox</div>
+        <h2 class="text-2xl md:text-3xl serif-text max-w-sm">Crafting permanent digital architecture</h2>
+      </div>
+      <div class="flex flex-col space-y-2">
+        <a class="text-lg hover:opacity-70 transition-opacity"
+          href="mailto:macrobox.com@gmail.com">macrobox.com@gmail.com</a>
+        <a class="text-lg hover:opacity-70 transition-opacity" href="tel:+917083096777">+91 7083096777</a>
+      </div>
+      <div class="text-right text-xs opacity-50 uppercase tracking-widest flex flex-col space-y-2">
+        <p>© 2024 MacroBox</p>
+        <p>All Rights Reserved</p>
+      </div>
+    </div>
+  </footer>
+  <!-- END: Footer -->
+  <!-- BEGIN: Team Modal -->
+  <div id="team-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-name"
+    class="fixed inset-0 z-[100] flex items-end md:items-center justify-center pointer-events-none">
+    <!-- Backdrop -->
+    <div
+      class="absolute inset-0 bg-[#14140F]/80 backdrop-blur-sm transition-opacity duration-300 pointer-events-auto opacity-0 [.modal-open_&]:opacity-100">
+    </div>
+
+    <!-- Modal Content Container -->
+    <div id="team-modal-content"
+      class="relative w-full max-w-4xl h-[95vh] md:max-h-[85vh] bg-brand-bg rounded-t-3xl md:rounded-3xl shadow-2xl flex flex-col pointer-events-auto transform transition-transform duration-400 translate-y-full [.modal-open_&]:translate-y-0 md:translate-y-10 md:[.modal-open_&]:translate-y-0 opacity-0 [.modal-open_&]:opacity-100 overflow-hidden">
+
+      <!-- Close button -->
+      <button id="close-modal" aria-label="Close modal"
+        class="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 bg-white/50 backdrop-blur-sm rounded-full flex items-center justify-center text-brand z-20 hover:bg-white hover:text-accent transition-colors focus:outline-none focus:ring-2 focus:ring-accent shadow-sm">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="overflow-y-auto w-full h-full p-6 pt-16 md:pt-12 md:p-12 relative flex flex-col md:block">
+        <!-- Modal Header -->
+        <div class="flex flex-col md:flex-row gap-8 md:gap-12 mb-12 items-start">
+          <div
+            class="w-full md:w-1/3 aspect-[3/4] flex-shrink-0 bg-brand-dim rounded-xl overflow-hidden shadow-sm relative">
+            <img id="modal-image" src="" alt="" class="w-full h-full object-cover grayscale">
+          </div>
+          <div class="w-full md:w-2/3 pt-0 md:pt-4">
+            <h2 id="modal-name" class="text-4xl md:text-5xl serif-text mb-2"></h2>
+            <p id="modal-role" class="text-sm tracking-widest uppercase opacity-60 mb-6 font-medium text-accent"></p>
+            <p id="modal-bio" class="text-lg leading-relaxed font-light opacity-80 max-w-xl modal-body-content"></p>
+
+            <div class="mt-8 flex flex-wrap gap-2 modal-body-content" id="modal-tags">
+              <!-- Tags injected here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Details Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 modal-body-content pb-12">
+          <!-- Skills & Projects -->
+          <div class="space-y-12">
+            <div>
+              <h3 class="text-sm font-medium tracking-widest uppercase mb-6 opacity-70">Proficiency</h3>
+              <div id="modal-skills" class="space-y-4">
+                <!-- Skills injected here -->
+              </div>
+            </div>
+            <div>
+              <h3 class="text-sm font-medium tracking-widest uppercase mb-6 opacity-70">Selected Contributions</h3>
+              <div id="modal-projects">
+                <!-- Projects injected here -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Unique Feature Block -->
+          <div>
+            <h3 class="text-sm font-medium tracking-widest uppercase mb-6 opacity-70">Specialty</h3>
+            <div id="modal-unique" class="h-64">
+              <!-- Unique feature injected here -->
+            </div>
+
+            <div class="mt-12 flex items-center gap-6 pt-8 border-t border-brand/10">
+              <a href="#" class="opacity-60 hover:opacity-100 hover:text-accent transition-colors"><svg width="20"
+                  height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                  </path>
+                </svg></a>
+              <a href="#" class="opacity-60 hover:opacity-100 hover:text-accent transition-colors"><svg width="20"
+                  height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                  <rect x="2" y="9" width="4" height="12"></rect>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg></a>
+              <a href="#" class="opacity-60 hover:opacity-100 hover:text-accent transition-colors"><svg width="20"
+                  height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path>
+                </svg></a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<!-- END: Team Modal -->
+  <!-- END: Team Modal -->
 
-<!-- BEGIN: Image Modal -->
-<div id="image-modal" aria-hidden="true" role="dialog" class="fixed inset-0 z-[110] flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300 [&:not([aria-hidden='true'])]:opacity-100 [&:not([aria-hidden='true'])]:pointer-events-auto">
-  <div class="absolute inset-0 bg-[#14140F]/95 backdrop-blur-md" id="image-modal-backdrop"></div>
-  <button id="close-image-modal" aria-label="Close image" class="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white z-20 hover:bg-white hover:text-brand transition-colors focus:outline-none shadow-sm border border-white/20">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-  </button>
-  <img id="image-modal-img" src="" alt="Large Screenshot" class="relative z-10 max-w-[95vw] max-h-[95vh] object-contain rounded-xl shadow-2xl transform scale-95 transition-transform duration-300">
-</div>
-<!-- END: Image Modal -->
+  <!-- BEGIN: Image Modal -->
+  <div id="image-modal" aria-hidden="true" role="dialog"
+    class="fixed inset-0 z-[110] flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300 [&:not([aria-hidden='true'])]:opacity-100 [&:not([aria-hidden='true'])]:pointer-events-auto">
+    <div class="absolute inset-0 bg-[#14140F]/95 backdrop-blur-md" id="image-modal-backdrop"></div>
+    <button id="close-image-modal" aria-label="Close image"
+      class="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white z-20 hover:bg-white hover:text-brand transition-colors focus:outline-none shadow-sm border border-white/20">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <img id="image-modal-img" src="" alt="Large Screenshot"
+      class="relative z-10 max-w-[95vw] max-h-[95vh] object-contain rounded-xl shadow-2xl transform scale-95 transition-transform duration-300">
+  </div>
+  <!-- END: Image Modal -->
 </body>
+
 </html>
