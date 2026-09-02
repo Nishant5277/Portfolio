@@ -1,4 +1,4 @@
-﻿/**
+/**
  * AcidSquares - WebGL Background  |  MacroBox Portfolio
  * Palette: Forest Green #2C4A3B · Umber #6B4F30 · Burnt Sienna #c5523f · Parchment #DFC09A
  */
@@ -157,7 +157,7 @@
       self.mouse.y = 1 - (cy - r.top) / r.height;
     }
     hero.addEventListener("mousemove", function(e){ upd(e.clientX, e.clientY); });
-    hero.addEventListener("touchmove", function(e){ e.preventDefault(); upd(e.touches[0].clientX,e.touches[0].clientY); }, {passive:false});
+    hero.addEventListener("touchmove", function(e){ upd(e.touches[0].clientX,e.touches[0].clientY); }, {passive:true});
     window.addEventListener("resize", function(){ self.resize(); });
   };
 
